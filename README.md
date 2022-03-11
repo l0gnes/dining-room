@@ -1,5 +1,5 @@
 # Dining Room 🍴
-### COMP 2513 Final Project 2022
+### For COMP 2513 Final Project 2022
 
 A basic application which is supposed to provide an "smart" alternative to the classic paper cookbook, it will allow the sole user to provide information regarding whether or not the recipes in their cookbook are vegan friendly, contain dairy, etc.
 
