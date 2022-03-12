@@ -9,3 +9,19 @@ The main stack is the following:
 + Node.js w/ Express.js
 + Prisma ORM connecting to PostgreSQL database
 ```
+
+# Deploying 🚀
+
+This project comes bundled with a docker compose file for easy parity across different systems, This program was built with the docker container in mind, so it is highly recommended that this is how the project is self-hosted.
+
+```sh
+$ docker-compose up -d
+```
+
+Below is a table which contains the information about the ports in the application for (documentation purposes):
+
+| Service | Port |
+| :------ | :--- |
+| client (Vue.js Application) | `8080` |
+| api (Node & Express.js) | `5000` |
+| database (postgres) | `5432` | 
