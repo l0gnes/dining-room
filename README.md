@@ -10,7 +10,7 @@ The main stack is the following:
 + Prisma ORM connecting to PostgreSQL database
 ```
 
-### Running the Project
+# Deploying 🚀
 
 This project comes bundled with a docker compose file for easy parity across different systems, This program was built with the docker container in mind, so it is highly recommended that this is how the project is self-hosted.
 
