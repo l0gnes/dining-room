@@ -15,7 +15,7 @@ The main stack is the following:
 This project comes bundled with a docker compose file for easy parity across different systems, This program was built with the docker container in mind, so it is highly recommended that this is how the project is self-hosted.
 
 ```sh
-$ docker-compose up -d
+$ docker build && docker-compose up -d
 ```
 
 Below is a table which contains the information about the ports in the application for (documentation purposes):
