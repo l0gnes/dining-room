@@ -37,6 +37,9 @@ services:
     volumes:
       - ./server
 
+    environment:
+      PRISMA_DATABASE_URL: ${PRISMA_DATABASE_URL}
+      
 volumes:
   db-data:
     driver: local

@@ -4,11 +4,13 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "npx prisma db push && node server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.3"
+    "@prisma/client": "^3.10.0",
+    "express": "^4.17.3",
+    "prisma": "^3.10.0"
   }
 }
