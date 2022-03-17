@@ -16,7 +16,7 @@ module.exports = {
     'no-unused-vars' : process.env.NODE_ENV === 'production' ? 'error' : 'warn',
     // 'no-unused-components' : process.env.NODE_ENV === 'production' ? 'error' : 'warn',
     "no-unreachable" : process.env.NODE_ENV === 'production' ? 'error' : 'warn',
-    'linebreak-style' : ['error', 'windows'],
+    'linebreak-style' : ['off', 'windows'],
     'quotes' : ['error', 'double'],
     "no-var" : "error",
     "no-tabs" : "off",
