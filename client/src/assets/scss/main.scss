@@ -1,0 +1,18 @@
+@use 'colours' as colours;
+@use 'fonts' as fonts;
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: colours.$main-background !important;
+    
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+}
+
+@import 'node_modules/bootstrap/scss/bootstrap.scss';
+@import 'node_modules/bootstrap-vue/src/index.scss';
