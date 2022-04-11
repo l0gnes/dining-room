@@ -3,13 +3,19 @@
 */
 
 const express = require("express");
+const cors = require("cors");
 const router = express.Router();
+
+router.use(
+    cors()
+)
 
 const { PrismaClient, RecordNotFound } = require("@prisma/client");
 
 const prisma = new PrismaClient();
 
-/*  /recipes/all
+/*  
+*   /recipes/all
 *       GET: Gets all of the existing recipes, with pagination!     @CRUD:R    
 */
 
@@ -59,7 +65,8 @@ router.get(
     }
 );
 
-/*  /recipes/:id
+/*
+*   /recipes/:id
 *       GET: Fetch a single recipe                                  @CRUD:R
 *       PUT: Updates a specific recipe with new data                @CRUD:U
 *       DELETE: You'll never guess what this does                   @CRUD:D
@@ -107,9 +114,7 @@ router.delete(
             return res.send({});
         }
 
-        return res.json(
-            deletedRecipe
-        );
+        return res.status(200).json({});
 
     }    
 )
@@ -122,15 +127,21 @@ router.delete(
 // @l0gnes : Closes issue https://github.com/l0gnes/dining-room/issues/1
 
 router.post(
-    "/",
-    async (req, res) => {
-        res.json(
+    "",
+    async (req, res, next) => {
+        
+        // TODO(@l0gnes) Maybe actually implement some way to verify the data before writing it to the database
+
+        await prisma.recipe.create(
             {
-                "body" : req.body,
-                "file" : req.file
-            }
-        )
+                "data" :  req.body,
+            },
+        );
+
+        return res.json(
+            req.body
+        );
     }
-)
+);
 
 module.exports = router;

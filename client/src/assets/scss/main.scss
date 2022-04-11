@@ -12,7 +12,23 @@ body {
     -ms-overflow-style: none;
     scrollbar-width: none;
 
+    font-smooth: always;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
 }
+
+$input-bg: colours.$main-background;
+$input-border-color: darken(colours.$diner-green, 50%);
+$input-color: white;
+
+$modal-backdrop-bg: darken(colours.$diner-green, 50%);
+$modal-content-bg: colours.$main-background;
+$modal-content-border-color: colours.$diner-lime;
+$modal-content-color: white;
+
+$card-bg: colours.$main-background;
+$card-border-color: colours.$diner-lime;
 
 @import 'node_modules/bootstrap/scss/bootstrap.scss';
 @import 'node_modules/bootstrap-vue/src/index.scss';

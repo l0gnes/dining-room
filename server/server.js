@@ -4,15 +4,10 @@ const cors = require('cors');
 const multer = require('multer');
 const app = express();
 
-app.use(cors(
-    {
-        origin: "*",                // I'm aware this is insecure but docker moment
-        optionsSuccessStatus: 200
-    }
-));
+app.use(cors({origin: true}));
 
 app.use(bodyparser.json());                         // Parses JSON data
-app.use(bodyparser.urlencoded({ extended: true}));  // Parses application/www
+app.use(bodyparser.urlencoded({extended: true}))
 
 upload = multer();
 app.use(upload.array());                            // For parsing multipart data
