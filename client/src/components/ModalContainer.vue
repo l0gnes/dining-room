@@ -2,6 +2,8 @@
   <b-modal
     :title="title"
     ref="diner-modal"
+    body-text-variant="light"
+    header-text-variant="light"
     hide-footer
   >
 

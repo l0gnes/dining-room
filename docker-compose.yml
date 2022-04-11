@@ -10,7 +10,14 @@ services:
       - "8080:8080"
 
     volumes:
-      - ./client
+      - ./client:/home/client
+
+    networks:
+      - dining
+
+    depends_on:
+      - database
+      - server
 
   database:
     restart: always
@@ -25,7 +32,10 @@ services:
 
     volumes:
       - db-data:/var/lib/postgresql/data
-      - ./init/docker-entrypoint-initdb.d
+      - ./init/docker-entrypoint-initdb.d:/init/docker-entrypoint-initdb.d
+
+    networks:
+      - dining
 
   server:
     restart: 'always'
@@ -34,12 +44,24 @@ services:
     ports:
       - "5000:5000"
 
+    expose:
+      - "5000"
+
     volumes:
-      - ./server
+      - ./server:/home/server
 
     environment:
       PRISMA_DATABASE_URL: ${PRISMA_DATABASE_URL}
+
+    networks:
+      - dining
+
+    depends_on:
+      - database
       
 volumes:
   db-data:
     driver: local
+
+networks:
+  dining:

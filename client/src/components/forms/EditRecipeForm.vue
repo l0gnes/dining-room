@@ -1,5 +1,5 @@
 <template>
-  <b-form @submit="createRecipeQuery">
+  <b-form @submit="editRecipeQuery">
     <b-form-group
       id="recipe-name"
         label="Recipe Name"
@@ -66,12 +66,23 @@
       <b-form-file accept="image/jpeg, image/png" id="image-input-entry" v-model="form.image"/>
     </b-form-group>
 
-    <b-button
-      type = "submit"
-      variant = "success"
-    >
-      Add Recipe
-    </b-button>
+    <div id="edit-recipe-button-container">
+      <b-button
+        type = "submit"
+        variant = "success"
+        @click="editRecipeQuery"
+      >
+        Edit Recipe
+      </b-button>
+
+      <b-button
+        type = "button"
+        variant = "secondary"
+        @click="editRecipeQuery"
+      >
+        Cancel
+      </b-button>
+    </div>
 
   </b-form>
 </template>
@@ -80,22 +91,35 @@
 import axios from "axios";
 
 export default {
-  name: "CreateRecipeForm",
+  name: "EditRecipeForm",
   methods: {
-    createRecipeQuery() {
-      // Code to actually create the recipes
-      const clonedForm = { ...this.form };
-      axios.post("http://localhost:5000/recipes", clonedForm, { "Access-Control-Allow-Origin": "*" }).then(
-        (response) => {
-          this.$emit("createNewRecipe", response.data);
-        },
-      );
+    editRecipeQuery() {
+      const duplicate = { ...this.form };
+
+      axios.put(`http://localhost:5000/recipes/${this.recipeId}`, duplicate, { "Access-Control-Allow-Origin": "*" })
+        .then(
+          () => {
+            this.$emit("editRecipe", this.recipeId, duplicate);
+          },
+        );
     },
 
+    updateForm() {
+      console.log("Hello World!", this.recipeId);
+      axios.get(`http://localhost:5000/recipes/${this.recipeId}`)
+        .then(
+          (response) => {
+            const duplicate = { ...response.data };
+            delete duplicate.id;
+            this.form = duplicate;
+          },
+        );
+    },
   },
 
   data() {
     return {
+      recipeId: null,
       form: {
         name: "",
         description: "",
@@ -105,11 +129,22 @@ export default {
       },
     };
   },
+
+  created() {
+    this.recipeId = localStorage.getItem("currentlyEditing");
+    this.updateForm();
+  },
 };
 </script>
 
 <style lang="scss">
 
   @import "@/assets/scss/colours.scss";
+
+  #edit-recipe-button-container {
+    & > button {
+      margin-right: 0.5rem;
+    }
+  }
 
 </style>

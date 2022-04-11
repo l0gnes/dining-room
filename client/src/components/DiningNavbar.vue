@@ -22,6 +22,7 @@ export default {
 <style lang="scss" scoped>
 
   #dining-navbar-base {
+    z-index: 999;
     position: absolute;
     background: rgba(0,0,0,0);
   }
@@ -30,13 +31,15 @@ export default {
       color: white !important;
       padding: 0.5rem 1rem;
       opacity: 0.7;
-      font-weight: 500;
+      font-weight: 400;
       transition: opacity 0.25s ease-in-out;
-      margin-right: 1rem;
+      margin-right: 0.5rem;
       border-color: white;
       transition: border 0.1s ease;
       border-bottom-style: solid;
       border-bottom-width: 0;
+      font-size: large;
+      line-height: 0.5rem;
 
       &:hover {
         opacity: 1;
