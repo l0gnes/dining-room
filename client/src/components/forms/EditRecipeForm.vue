@@ -70,7 +70,6 @@
       <b-button
         type = "submit"
         variant = "success"
-        @click="editRecipeQuery"
       >
         Edit Recipe
       </b-button>
@@ -78,7 +77,6 @@
       <b-button
         type = "button"
         variant = "secondary"
-        @click="editRecipeQuery"
       >
         Cancel
       </b-button>
@@ -99,13 +97,12 @@ export default {
       axios.put(`http://localhost:5000/recipes/${this.recipeId}`, duplicate, { "Access-Control-Allow-Origin": "*" })
         .then(
           () => {
-            this.$emit("editRecipe", this.recipeId, duplicate);
+            this.$emit("triggerEditRecipe", this.recipeId, duplicate);
           },
         );
     },
 
     updateForm() {
-      console.log("Hello World!", this.recipeId);
       axios.get(`http://localhost:5000/recipes/${this.recipeId}`)
         .then(
           (response) => {
@@ -132,6 +129,7 @@ export default {
 
   created() {
     this.recipeId = localStorage.getItem("currentlyEditing");
+    localStorage.removeItem("currentlyEditing");
     this.updateForm();
   },
 };

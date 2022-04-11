@@ -38,6 +38,8 @@
 
         <hr style="width:90%;"/>
 
+      <template v-if="this.recipeDataLoaded">
+
         <template v-if="this.recipes.length > 0">
           <div id="recipe-card-holder">
 
@@ -64,6 +66,20 @@
             <h4><a href="#" @click="openRecipeCreateModal()">Try adding one now</a></h4>
           </div>
         </template>
+
+      </template>
+
+      <template v-else>
+        <div id="spinner-container">
+
+        <b-spinner
+          type="grow"
+          variant="success"
+          label="Loading Recipes"
+        />
+
+        </div>
+      </template>
 
       </div>
 
@@ -110,8 +126,6 @@ export default {
     },
 
     openEditRecipeModal(recipeId) {
-      console.log(recipeId);
-
       this.currentlyEditing = recipeId;
       // redundant but i dont want to install VueX
       localStorage.setItem("currentlyEditing", this.currentlyEditing);
@@ -144,15 +158,32 @@ export default {
     },
 
     editRecipeFromFormCallback(recipeId, newRecipeData) {
-      const clonedData = { ...this.recipes };
+      this.$refs["edit-recipe-modal"].hideModal();
+
+      this.$bvToast.toast(
+        `"${newRecipeData.name}" has been updated!`,
+        {
+          title: "Successfully edited recipe!",
+          autoHideDelay: 2500,
+          appendToast: true,
+          variant: "success",
+        },
+      );
+
+      const clonedData = [...this.recipes];
 
       // locate the recipe index (save the index to a var)
 
-      const recipeIndex = clonedData.findIndex((r) => (r.value.id === recipeId));
+      const recipeIndex = clonedData.findIndex((r) => (r.id === recipeId));
+
+      console.log("New Recipe Data:", newRecipeData);
 
       // replace old data with new data
 
-      clonedData.splice(recipeIndex, 1, newRecipeData);
+      const clonedNewRecipeData = { ...newRecipeData };
+      clonedNewRecipeData.id = parseInt(recipeId, 10);
+
+      clonedData.splice(recipeIndex, 1, clonedNewRecipeData);
 
       // Overwrite the actual recipe data for the page, which should hopefully
       // work because of two-way data-binding.
@@ -260,6 +291,12 @@ export default {
       }
 
     }
+  }
+
+  #spinner-container {
+    padding-top: 10vh;
+    align-content: center;
+    text-align: center;
   }
 
 </style>
