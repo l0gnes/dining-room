@@ -35,7 +35,7 @@ export default {
       transition: opacity 0.25s ease-in-out;
       margin-right: 0.5rem;
       border-color: white;
-      transition: border 0.1s ease;
+      transition: all 0.1s ease;
       border-bottom-style: solid;
       border-bottom-width: 0;
       font-size: large;
@@ -44,6 +44,7 @@ export default {
       &:hover {
         opacity: 1;
         border-bottom-width: 5px;
+        letter-spacing: 1px;
       }
 
     }

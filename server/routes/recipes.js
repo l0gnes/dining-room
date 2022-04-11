@@ -56,8 +56,6 @@ router.get(
 
         }
 
-        console.log("recipesList: " + recipesList);
-
         res.json(
             recipesList
         );
@@ -78,6 +76,8 @@ router.get(
 router.get(
     "/:id",
     async (req, res) => {
+
+        console.log("THE ID THING FOR GET: ", parseInt(req.params.id));
 
         let singleRecipe = await prisma.recipe.findUnique(
             {
@@ -119,6 +119,35 @@ router.delete(
     }    
 )
 
+// Closes issue: https://github.com/l0gnes/dining-room/issues/3
+
+router.put(
+    "/:id",
+    async (req, res) => {
+
+        console.log("THE ID THING FOR PUT: ", parseInt(req.params.id));
+
+        try {
+
+            const updatedRecipe = await prisma.recipe.update(
+                {
+                    where: {id: parseInt(req.params.id)},
+                    data: req.body
+                },
+            );
+            
+            // I hope putting this here works
+            console.log("what 1");
+            return res.status(200).json(updatedRecipe);
+
+        } catch (err) {
+            console.log("what 2");
+            return res.status(500).send({});
+            
+        }
+    }
+)
+
 /*
 *   /recipes
 *       POST: Creates a new instance of recipe from a form
@@ -132,14 +161,14 @@ router.post(
         
         // TODO(@l0gnes) Maybe actually implement some way to verify the data before writing it to the database
 
-        await prisma.recipe.create(
+        let newRecipe = await prisma.recipe.create(
             {
                 "data" :  req.body,
             },
         );
 
         return res.json(
-            req.body
+            newRecipe
         );
     }
 );
