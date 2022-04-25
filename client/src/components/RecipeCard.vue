@@ -2,10 +2,8 @@
   <b-overlay :show="showOverlay">
     <b-card
       class="recipe-card-container"
-      img-left
       text-variant="white"
       v-bind:title="name"
-      image-src="https://placekitten.com/g/300/300"
       :aria-hidden="showOverlay ? 'true' : null"
     >
       <div class="recipe-card-main-content">
@@ -29,7 +27,7 @@
       <div class="recipe-card-footer-text">
 
         <!-- TODO: You know what you have to do here (In case you don't; perish.) -->
-        <a href="#">View Recipe</a>
+        <a :href="'/recipe/' + this.id">View Recipe</a>
         <a v-on:click="this.editRecipe" href="#">Edit</a>
         <a v-on:click="this.deleteRecipe" href="#">Delete</a>
       </div>

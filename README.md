@@ -12,10 +12,19 @@ The main stack is the following:
 
 # Deploying 🚀
 
-This project comes bundled with a docker compose file for easy parity across different systems, This program was built with the docker container in mind, so it is highly recommended that this is how the project is self-hosted.
+~~This project comes bundled with a docker compose file for easy parity across different systems, This program was built with the docker container in mind, so it is highly recommended that this is how the project is self-hosted.~~
+
+
+### LAST MINUTE (I HATE DOCKER) DISCLAIMER (!!!)
+I somehow broke the production client docker thing and I don't know how to fix it and I really can't spend another 30 hours on debugging docker's networking quirks and reformatting my hard drive for the 3rd time to make room for every image. I have verified that both the server and database images work correctly but you'll probably still have to run the client in development mode.
+
+I understand if the redistribution of my code being hindered by this results in me potentionally losing points because I have no idea how easy it is to run anymore.
 
 ```sh
-$ docker-compose build && docker-compose up -d
+~$ docker-compose build server database
+~$ docker-compose up -d server database
+~$ cd ./client/ 
+~$ npm run serve 
 ```
 
 Below is a table which contains the information about the ports in the application for (documentation purposes):

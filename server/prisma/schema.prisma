@@ -12,6 +12,5 @@ model Recipe {
     name            String      // The name of the dish
     description     String?     // A small description of the recipe like what they would say on a cooking show to make store bought spaghetti sound gourmet
     recipe          String?     // The actual long string containing what the recipe entails
-    image           String?     // This is used when contacting the part of the web server that serves the images to the client, if it doesn't exist then there's no image (obv)
     tags            String[]    // The different quirky tags a recipe could have, for instance: "Vegan"
 }

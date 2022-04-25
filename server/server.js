@@ -12,13 +12,7 @@ app.use(bodyparser.urlencoded({extended: true}))
 upload = multer();
 app.use(upload.array());                            // For parsing multipart data
 
-const testEndpoints = require('./routes/test');
-app.use('/test', testEndpoints);
-
 const recipeAPIEndpoints = require('./routes/recipes');
 app.use('/recipes', recipeAPIEndpoints);
-
-// For all those epic sandwich recipes
-app.use('/static', express.static("food_images"));
 
 app.listen(5000);

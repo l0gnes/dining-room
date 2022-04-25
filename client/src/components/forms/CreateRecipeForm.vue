@@ -57,15 +57,6 @@
 
     </b-form-group>
 
-    <b-form-group
-      id = "image-input"
-      label = "Image"
-      label-for = "image-input-entry"
-      description="An image of the final result"
-    >
-      <b-form-file accept="image/jpeg, image/png" id="image-input-entry" v-model="form.image"/>
-    </b-form-group>
-
     <b-button
       type = "submit"
       variant = "success"
@@ -101,7 +92,6 @@ export default {
         description: "",
         recipe: "",
         tags: [],
-        image: null,
       },
     };
   },

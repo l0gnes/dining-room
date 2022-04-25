@@ -30,7 +30,7 @@
           </h1>
 
           <div style="float: right;">
-                <b-button @click="openRecipeCreateModal()" class="text-muted" id="add-recipe-button">
+                <b-button @click="openRecipeCreateModal()" class="text-muted" id="add-recipe-button" :disabled="!this.recipeDataLoaded">
                   <b-icon-plus/> Add Recipe
                 </b-button>
           </div>
@@ -38,7 +38,7 @@
 
         <hr style="width:90%;"/>
 
-      <template v-if="this.recipeDataLoaded">
+      <template v-if="this.recipeDataLoaded || this.recipeDataError">
 
         <template v-if="this.recipes.length > 0">
           <div id="recipe-card-holder">
@@ -55,6 +55,14 @@
               v-on:deleteRecipe="deleteRecipeCard(index)"
             />
 
+          </div>
+        </template>
+
+        <template v-else-if="!this.recipeDataLoaded && this.recipeDataError">
+          <div id="no-recipes-found">
+            <h2>
+              Failed to retrieve recipes! Is the server broken?
+            </h2>
           </div>
         </template>
 
@@ -116,6 +124,7 @@ export default {
     return {
       recipes: [], // The array that is going to contain the recipe data once it is loaded
       recipeDataLoaded: false, // Whether or not the query for the recipe data has been completed. Purely for aesthetic things
+      recipeDataError: false,
       currentlyEditing: null,
     };
   },
@@ -141,8 +150,6 @@ export default {
       this.recipes.push(newRecipe);
     },
 
-    // ! TODO(@l0gnes): Rewrite this callback so the newRecipe passed includes the new recipe id
-    // Issue: https://github.com/l0gnes/dining-room/issues/25
     createNewRecipeFromFormCallback(newRecipe) {
       this.$refs["create-recipe-modal"].hideModal();
       this.createNewRecipeCard(newRecipe); // I know this is redundant
@@ -174,16 +181,14 @@ export default {
 
       // locate the recipe index (save the index to a var)
 
-      const recipeIndex = clonedData.findIndex((r) => (r.id === recipeId));
-
-      console.log("New Recipe Data:", newRecipeData);
+      const recipeIndex = clonedData.findIndex((r) => (r.id === parseInt(recipeId, 10)));
 
       // replace old data with new data
 
       const clonedNewRecipeData = { ...newRecipeData };
       clonedNewRecipeData.id = parseInt(recipeId, 10);
 
-      clonedData.splice(recipeIndex, 1, clonedNewRecipeData);
+      clonedData[recipeIndex] = clonedNewRecipeData;
 
       // Overwrite the actual recipe data for the page, which should hopefully
       // work because of two-way data-binding.
@@ -197,8 +202,9 @@ export default {
       (response) => {
         this.recipes = response.data;
         this.recipeDataLoaded = true;
+        this.recipeDataError = false;
       },
-    );
+    ).catch(() => { this.recipeDataError = true; });
   },
 };
 </script>

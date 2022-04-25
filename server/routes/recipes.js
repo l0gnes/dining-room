@@ -77,8 +77,6 @@ router.get(
     "/:id",
     async (req, res) => {
 
-        console.log("THE ID THING FOR GET: ", parseInt(req.params.id));
-
         let singleRecipe = await prisma.recipe.findUnique(
             {
                 where: {
@@ -87,7 +85,7 @@ router.get(
             }
         );
 
-        return res.json(
+        return res.status(200).json(
             singleRecipe
         );
 
@@ -124,8 +122,6 @@ router.delete(
 router.put(
     "/:id",
     async (req, res) => {
-
-        console.log("THE ID THING FOR PUT: ", parseInt(req.params.id));
 
         try {
 
