@@ -34,3 +34,8 @@ Below is a table which contains the information about the ports in the applicati
 | client (Vue.js Application) | `8080` |
 | api (Node & Express.js) | `5000` |
 | database (postgres) | `5432` | 
+
+---
+
+| Time Spent on Project: | [![wakatime](https://wakatime.com/badge/user/863c0ea9-1f76-4628-9b82-b32d093ded49/project/4a6f5b29-db02-4a00-8e51-49b3dde3f127.svg)](https://wakatime.com/badge/user/863c0ea9-1f76-4628-9b82-b32d093ded49/project/4a6f5b29-db02-4a00-8e51-49b3dde3f127) |
+| :--- | :---: |
