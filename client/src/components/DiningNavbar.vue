@@ -6,7 +6,6 @@
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
         <b-nav-item class="dining-nav-link" to="" active-class="active">Recipes</b-nav-item>
-        <b-nav-item class="dining-nav-link" to="about" active-class="active">About</b-nav-item>
       </b-navbar-nav>
     </b-collapse>
 
